@@ -3,7 +3,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev",
+    "build:css":"concurrently \"tailwindcss -m -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
+    "dev": "npm run dev:css",
+    "dev:css":"concurrently \"tailwindcss -w -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -20,7 +22,9 @@
     "@remix-run/serve": "^1.11.0",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "concurrently": "^7.6.0",
     "eslint": "^8.27.0",
+    "tailwindcss": "^3.2.4",
     "typescript": "^4.8.4"
   },
   "engines": {
