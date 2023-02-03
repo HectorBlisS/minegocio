@@ -38,7 +38,7 @@ export default function Hero() {
   );
 }
 
-const Button = ({ children }) => {
+export const Button = ({ children }) => {
   return (
     <button className='py-2 px-4 bg-blue-500 text-white rounded-full font-bold my-4 hover:bg-blue-600 transition-all active:scale-95'>
       {children}

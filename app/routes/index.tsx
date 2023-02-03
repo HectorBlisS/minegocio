@@ -1,4 +1,6 @@
 import Hero from '~/components/Hero';
+import NavBar from '~/components/NavBar';
+import Section from '~/components/Section';
 
 export default function Index() {
   return (
@@ -9,8 +11,10 @@ export default function Index() {
       `,
       }}
     >
-      <main className='max-w-[720px] mx-auto py-20'>
+      <NavBar />
+      <main className='max-w-[720px] mx-auto py-24'>
         <Hero />
+        <Section />
       </main>
     </div>
   );
