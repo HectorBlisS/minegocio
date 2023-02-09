@@ -40,7 +40,7 @@ export default function Hero() {
 
 export const Button = ({ children }) => {
   return (
-    <button className='py-2 px-4 bg-blue-500 text-white rounded-full font-bold my-4 hover:bg-blue-600 transition-all active:scale-95'>
+    <button className='block py-2 px-4 bg-blue-500 text-white rounded-full font-bold my-4 hover:bg-blue-600 transition-all active:scale-95'>
       {children}
     </button>
   );

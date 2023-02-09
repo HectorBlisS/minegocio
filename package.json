@@ -3,18 +3,22 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "build:css":"concurrently \"tailwindcss -m -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
+    "build:css": "concurrently \"tailwindcss -m -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
     "dev": "npm run dev:css",
-    "dev:css":"concurrently \"tailwindcss -w -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
+    "dev:css": "concurrently \"tailwindcss -w -i tailwind.css -o app/styles/style.css\" \"remix dev\" ",
     "typecheck": "tsc"
   },
   "dependencies": {
     "@remix-run/node": "^1.11.0",
     "@remix-run/react": "^1.11.0",
     "@remix-run/vercel": "^1.11.0",
+    "@types/nodemailer": "^6.4.7",
+    "@types/validator": "^13.7.12",
     "@vercel/node": "^2.6.2",
+    "nodemailer": "^6.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.11.0",

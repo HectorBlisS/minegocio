@@ -1,0 +1,98 @@
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('message');
+  console.log(name, email, message);
+  if (!isEmail(email)) {
+    return { success: false, error: 'Proporciona un email válido' };
+  }
+  const transport = createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+  transport
+    .sendMail({
+      subject: 'Nuevo contacto',
+      from: 'contacto@fixter.org',
+      bcc: ['fixtergeek@gmail.com'],
+      html: `
+    <h2>Tienes un nuevo mensaje de: ${name}</h2>
+    <p>Correo: ${email}</p>
+    <p>Mensaje: ${message}</p>
+    `,
+    })
+    .then((result) => console.log(result));
+
+  return { success: true }; // return error?
+};
+
+const TextField = ({
+  name,
+  placeholder,
+  label,
+  type,
+  error,
+}: {
+  name: string;
+  placeholder?: string;
+  label: string;
+  type?: string;
+  error?: string;
+}) => {
+  return (
+    <>
+      <label className='block mb-2 text-lg' htmlFor={name}>
+        {label}
+      </label>
+      {type === 'textarea' ? (
+        <textarea
+          name={name}
+          id={name}
+          cols={30}
+          rows={10}
+          className='mb-4 border border-blue-500 rounded-md px-4 py-2 text-slate-700 text-lg'
+          placeholder={placeholder}
+        ></textarea>
+      ) : (
+        <input
+          type={type}
+          name={name}
+          id={name}
+          placeholder={placeholder}
+          className='mb-4 border border-blue-500 rounded-md px-4 py-2 text-slate-700 text-lg'
+        />
+      )}
+      {error && <p className='text-red-500'>{error}</p>}
+    </>
+  );
+};
+
+export default function ContactForm({ error }) {
+  return (
+    <Form method='post' className='flex flex-col'>
+      <TextField
+        label='Tu nombre:'
+        name='name'
+        placeholder='Escribe tu nombre'
+      />
+      <TextField
+        label='Tu correo:'
+        name='email'
+        placeholder='Escribe tu correo'
+        type='email'
+        error={error}
+      />
+      <TextField
+        label='Tu correo:'
+        name='message'
+        placeholder='Escribe tu mensaje...'
+        type='textarea'
+      />
+      <Button>Enviar</Button>
+    </Form>
+  );
+}
